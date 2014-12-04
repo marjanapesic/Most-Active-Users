@@ -27,26 +27,28 @@ class MostActiveUsersSidebarWidget extends HWidget
     private function getMostActiveUsers($range = 5)
     {
         $users = array();
-        
-        $post = Post::model();
-        $like = Like::model();
-        $comment = Comment::model();
-        
+
         $criteria1 = new CDbCriteria();
         $criteria1->select = "created_by, count(*) cnt";
         $criteria1->group = 'created_by';
         
         // building subqueries
+        $post = Post::model();
         $postSql = $post->getCommandBuilder()
             ->createFindCommand($post->getTableSchema(), $criteria1)
             ->getText();
+        
+        $comment = Comment::model();
         $commentSql = $comment->getCommandBuilder()
             ->createFindCommand($comment->getTableSchema(), $criteria1)
             ->getText();
+        
+        $like = Like::model();
         $likeSql = $like->getCommandBuilder()
             ->createFindCommand($like->getTableSchema(), $criteria1)
             ->getText();
         
+        //query
         $criteria = new CDbCriteria();
         $criteria->join = "LEFT JOIN (" . $postSql . ") post ON post.created_by = t.id 
     		LEFT JOIN (" . $commentSql . ") comment ON comment.created_by = t.id
@@ -59,5 +61,4 @@ class MostActiveUsersSidebarWidget extends HWidget
         return $users;
     }
 }
-
 ?>
