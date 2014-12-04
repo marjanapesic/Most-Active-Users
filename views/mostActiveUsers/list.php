@@ -5,85 +5,92 @@
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true">&times;</button>
 			<h4 class="modal-title">
-				<?php 
-				echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', '<strong>Most</strong> active people'); ?>
+			    <?php
+                echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', '<strong>Most</strong> active people');
+                ?>
 			</h4>
 		</div>
 
-		<div class="modal-body" style="padding: 5px"> <?php
-			$i=0;
-			foreach ($users as $profile) {
+		<div class="modal-body" style="padding: 5px">
+			<ul class="media-list"> 
+			<?php
+			$i = 0;
+            foreach ($users as $profile) {
                 // check if the profile is valid
-            	if ($profile != null) {
-                	// get the corresponding user
-                    $user = User::model()->findByPk($profile['user_id']); ?>
-
-                    
-					<div class="media">
-						<span class="pull-left circle"><?php
-							echo $pages-> getCurrentPage() *  $pages->getPageSize() + (++$i);?>
-						</span> 
-						
-						<a href="<?php echo $user->getProfileUrl(); ?>" class="pull-left"> 
-							<img src="<?php echo $user->getProfileImage()->getUrl(); ?>" class="img-rounded tt img_margin" height="50" width="50"
-								alt="50x50" style="width: 50px; height: 50px;" data-src="holder.js/50x50">
-						</a>
-		
-						<div class="media-body">
-							<h4 class="media-heading">
-								<strong><?php echo $user->displayName;?> </strong>
-								<?php if ($user->group != null) { ?>
-									<small>(<?php echo $user->group->name; ?>) </small>
-								<?php } ?>
-							</h4>
-							
-							<div class="mostactiveusers">
-								<div class="entry pull-left">
-									<span class="count"><?php echo $profile['posts'];?>
-									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Posts created'); ?>
-									</span>
-								</div>
-								<div class="entry pull-left">
-									<span class="count"><?php echo $profile['comments'];?>
-									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Comments created'); ?>
-									</span>
-								</div>
-								<div class="entry pull-left">
-									<span class="count"><?php echo $profile['likes'];?>
-									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Likes given'); ?>
-									</span>
-								</div>
-							</div>
-		
-		
-						</div>
-					</div>
-					<hr/> <?php
-				}
-			}?>
+                if ($profile != null) {
+                    // get the corresponding user
+                    $user = User::model()->findByPk($profile['user_id']);
+                    ?>
+                    <li>
+    					<div class="media">
+    						<span class="pull-left circle"><?php
+                                echo $pages->getCurrentPage() * $pages->getPageSize() + (++ $i);
+                                ?>
+    						</span> 
+    						
+    						<a href="<?php echo $user->getProfileUrl(); ?>"
+    							class="pull-left"> <img
+    							src="<?php echo $user->getProfileImage()->getUrl(); ?>"
+    							class="img-rounded tt img_margin" height="50" width="50"
+    							alt="50x50" style="width: 50px; height: 50px;"
+    							data-src="holder.js/50x50">
+    						</a>
+    
+    						<div class="media-body">
+    							<h4 class="media-heading">
+    								<strong><a href="<?php echo $user->getProfileUrl(); ?>"> <?php echo $user->displayName;?> </a></strong>
+    								<?php if ($user->group != null) { ?>
+    									<small>(<?php echo $user->group->name; ?>) </small>
+    								<?php } ?>
+    							</h4>
+    							<div class="mostactiveusers">
+    								<div class="entry pull-left">
+    									<span class="count"><?php echo $profile['posts'];?>
+    									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Posts created'); ?>
+    									</span>
+    								</div>
+    								<div class="entry pull-left">
+    									<span class="count"><?php echo $profile['comments'];?>
+    									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Comments created'); ?>
+    									</span>
+    								</div>
+    								<div class="entry pull-left">
+    									<span class="count"><?php echo $profile['likes'];?>
+    									</span> <br> <span class="title"><?php echo Yii::t('MostActiveUsersModule.views_mostActiveUsers_list', 'Likes given'); ?>
+    									</span>
+    								</div>
+    							</div>
+    						</div>
+    					</div>
+    				</li>
+				<?php
+                }
+            }
+            ?>
+			</ul>
 		</div>
 
 		<div class="modal-footer" style="padding: 5px">
-			<div class="pagination-container"> <?php
-
-				$this->widget('CLinkPager', array(
-					//'dataProvider' => $dataProvider,
-					'pages'=> $pages,
-					'maxButtonCount' => 5,
-					'nextPageLabel' => '<i class="fa fa-step-forward"></i>',
-					'prevPageLabel' => '<i class="fa fa-step-backward"></i>',
-					'firstPageLabel' => '<i class="fa fa-fast-backward"></i>',
-					'lastPageLabel' => '<i class="fa fa-fast-forward"></i>',
-					'header' => '',
-					'htmlOptions' => array('class' => 'pagination'),
-					'id'=>'link_pager'
-				));
-            ?>
+			<div class="pagination-container"> 
+			<?php
+                $this->widget('CLinkPager', array(
+                    'pages' => $pages,
+                    'maxButtonCount' => 5,
+                    'nextPageLabel' => '<i class="fa fa-step-forward"></i>',
+                    'prevPageLabel' => '<i class="fa fa-step-backward"></i>',
+                    'firstPageLabel' => '<i class="fa fa-fast-backward"></i>',
+                    'lastPageLabel' => '<i class="fa fa-fast-forward"></i>',
+                    'header' => '',
+                    'htmlOptions' => array(
+                        'class' => 'pagination'
+                    ),
+                    'id' => 'link_pager'
+                ));
+                ?>
 			</div>
 		</div>
 
 	</div>
-
 </div>
 
 <script>

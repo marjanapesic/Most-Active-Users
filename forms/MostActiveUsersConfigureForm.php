@@ -6,8 +6,8 @@ class MostActiveUsersConfigureForm extends CFormModel {
     public function rules() {
         return array(
             array('noUsers', 'required'),
-        	array('noUsers', 'compare', 'compareValue'=>'0', 'operator'=>'>=', 'message'=>'The number of users must not be negative.'),
-        	array('noUsers', 'compare', 'compareValue'=>'7', 'operator'=>'<=', 'message'=>'The number of users must not be greater than a 7.'),
+        	array('noUsers', 'compare', 'compareValue'=>'0', 'operator'=>'>=', 'message'=> Yii::t('MostActiveUsersModule.base', 'The number of users must not be negative.')),
+        	array('noUsers', 'compare', 'compareValue'=>'7', 'operator'=>'<=', 'message'=> Yii::t('MostActiveUsersModule.base', 'The number of users must not be greater than a 7.')),
         );
     }
 

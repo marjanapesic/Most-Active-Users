@@ -1,6 +1,7 @@
 {
-    "id": "most_active_users",
+    "id": "mostactiveusers",
     "name": "Most Active Users Widget",
     "description": "",
     "keywords": ["most", "active", "users", "widget", "dashboard"],
+	"version": "0.1",
 }
