@@ -1,4 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="mostactiveusers-panel">
+
+    <!-- Display panel menu widget -->
+    <?php $this->widget('application.widgets.PanelMenuWidget', array('id' => 'mostactiveusers-panel')); ?>
+
 	<div class="panel-heading">
         <?php echo Yii::t('MostActiveUsersModule.base', '<strong>Most</strong> active people'); ?>
     </div>
