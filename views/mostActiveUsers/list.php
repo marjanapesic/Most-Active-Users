@@ -105,8 +105,7 @@
 
     function loadlistData(url) {
         var search = $('#search').val();
-        //var url = url || '
-        <?php echo Yii::app()->createUrl('admin/controller/action')?>';
+        var url = url || '<?php echo Yii::app()->createUrl('admin/controller/action')?>';
         $.ajax({type: "GET", url: url, success: function (data) {
             $("#globalModal").html(data);
         }});
